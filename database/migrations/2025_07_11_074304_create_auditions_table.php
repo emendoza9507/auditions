@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->date('date');
             $table->time('start');
+            $table->boolean('active')->default(true);
             $table->unsignedInteger('max_per_slot')->default(4);
             $table->timestamps();
         });

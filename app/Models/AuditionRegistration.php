@@ -10,9 +10,13 @@ class AuditionRegistration extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'age', 'parent_name',
+        'name', 'age', 'parent_name', 'phone',
         'instrument', 'email', 'audition_id',
         'audition_slot_id', 'agreed_terms'
+    ];
+
+    protected $casts = [
+        'agreed_terms' => 'boolean'
     ];
 
     public function audition(): BelongsTo

@@ -9,7 +9,7 @@
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -94,15 +94,18 @@
 
     <section id="registration" class="form-section">
         <h2>Registration Form</h2>
-        <form id="auditionForm">
+        <form id="auditionForm" action="{{ route('audition_registration.store') }}" method="POST">
+            @csrf
+            <input type="hidden" name="audition_id" value="{{ $audition->id }}"/>
+
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" required />
 
             <label for="age">Age</label>
-            <input type="number" id="age" name="age" min="10" max="17" required />
+            <input type="number" id="age" name="age" min="10" required />
 
-            <label id="parentname-label" for="parentname">Parent or Tutor Name if required</label>
-            <input type="text" id="parentname" name="parentname" />
+            <label id="parentname-label" for="parentname" style="display: none;">Parent or Tutor Name if required</label>
+            <input type="text" id="parentname" name="parentname" style="display: none;" />
 
             <label for="instrument">Instrument</label>
             <input type="text" id="instrument" name="instrument" required />
@@ -114,9 +117,9 @@
             <input type="phone" id="phone" name="phone" required />
 
             <label for="schedule">Schedule</label>
-            <select name="schedule" id="schedule"></select>
+            <select name="audition_slot_id" id="schedule"></select>
 
-            <label><input type="checkbox" r id="agree" name="agree"/> I accept the terms of use </label>
+            <label><input type="checkbox"  id="agreed_terms" name="agreed_terms"/> I accept the terms of use </label>
 
             <button type="submit">Submit Registration</button>
         </form>
@@ -131,23 +134,41 @@
         </div>
     </footer>
     <script>
+        const age = document.getElementById("age");
+        const parentName = document.getElementById("parentname");
+        const parentNameLabel = document.getElementById("parentname-label");
+        age.addEventListener('change', function() {
+            if(age.value < 18) {
+                parentName.style.display = "block";
+                parentName.required = true;
+                parentNameLabel.style.display = "block";
+            } else {
+                parentName.style.display = "none";
+                parentName.required = false;
+                parentNameLabel.style.display = "none";
+            }
+        })
+
         document.getElementById("auditionForm").addEventListener("submit", function (e) {
             e.preventDefault();
 
             const age = parseInt(document.getElementById("age").value);
             const messageEl = document.getElementById("formMessage");
 
-            if (age < 10 || age > 17) {
+            if (age < 10) {
                 messageEl.style.color = "red";
                 messageEl.textContent = "Age must be between 10 and 17 years.";
                 return;
             }
+
+            this.submit()
 
             messageEl.style.color = "green";
             messageEl.textContent = "Registration successfully submitted! We will contact you soon.";
 
             this.reset();
         });
+
     </script>
     <script>
         const countdownEl = document.getElementById('countdown');

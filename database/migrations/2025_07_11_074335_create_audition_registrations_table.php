@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('age');
             $table->string('parent_name')->nullable();
             $table->string('email');
+            $table->string('instrument');
             $table->string('phone');
             $table->string('agreed_terms');
             $table->timestamps();
