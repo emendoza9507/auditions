@@ -82,7 +82,7 @@
     <footer>
         <p>&copy; 2025 Jazz Hamilton Foundation. All rights reserved.</p>
         <div style="display: flex; flex-direction: column">
-            <a style="color:white" href="mailto:  auditions@jhartsfoundation.org">auditions@jhartsfoundation.com</a>
+            <a style="color:white" href="mailto:  auditions@jhartsfoundation.org">auditions@jhartsfoundation.org</a>
             <a style="color:white" href="tel: +1 407-513-2292">407-513-2292</a>
         </div>
     </footer>
