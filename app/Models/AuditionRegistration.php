@@ -12,7 +12,7 @@ class AuditionRegistration extends Model
     protected $fillable = [
         'name', 'age', 'parent_name', 'phone',
         'instrument', 'email', 'audition_id',
-        'audition_slot_id', 'agreed_terms'
+        'audition_slot_id', 'agreed_terms', 'payment_order_id', 'payment_status'
     ];
 
     protected $casts = [

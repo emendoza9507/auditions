@@ -24,10 +24,11 @@ class AuditionRegistrationController extends Controller
             'instrument' => 'required|string',
             'audition_slot_id' => 'required|exists:audition_slots,id',
             'audition_id' => 'required|exists:auditions,id',
+            'payment_order_id' => 'required'
         ]);
 
-        $auditionRegistration = AuditionRegistration::create($validatedData);
+        $auditionRegistration = AuditionRegistration::query()->create($validatedData);
 
-        return redirect()->route('audition_registration.show', $auditionRegistration->id)->with('success', 'Registration successful. Please make the payment to confirm your audition.');
+        return response()->json($auditionRegistration, 201)->header('Location', 'http://localhost:8000/audition_registrations/'.$auditionRegistration->id);
     }
 }

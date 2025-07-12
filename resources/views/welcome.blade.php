@@ -21,6 +21,7 @@
         </style>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @fluxAppearance
+        <script src="https://www.paypal.com/sdk/js?client-id={{config('app.paypal_client_id')}}&currency=USD"></script>
     </head>
     <body>
     <header class="hero">
@@ -121,7 +122,9 @@
 
             <label><input type="checkbox"  id="agreed_terms" name="agreed_terms"/> I accept the terms of use </label>
 
-            <button type="submit">Submit Registration</button>
+            <div id="paypal-button-container"></div>
+
+{{--            <button type="submit">Submit Registration</button>--}}
         </form>
         <div id="formMessage" class="form-message"></div>
     </section>
@@ -194,6 +197,59 @@
 
         updateCountdown();
         const interval = setInterval(updateCountdown, 1000);
+    </script>
+    {{--  Generar Boton de Pago  --}}
+    <script>
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                const name = document.getElementById('name').value.trim();
+                const age = document.getElementById('age').value.trim();
+                const instrument = document.getElementById('instrument').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const schedule = document.getElementById('schedule').value;
+                const agreed_terms = document.getElementById('agreed_terms').checked;
+
+                if(!name || !age || !instrument || !email || !schedule || !agreed_terms) {
+                    document.getElementById('formMessage').innerHTML = "Please complete all fields in the form before paying."
+                    return Promise.reject(new Error("Incomplete form"));
+                }
+
+                if(age < 18 && !document.getElementById('parentname').value.trim()) {
+                    document.getElementById('formMessage').innerHTML = "Please the name of parent is required."
+                    return Promise.reject(new Error("Incomplete form"));
+                }
+
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: { value: @json($audition->price) }
+                    }]
+                })
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    const form = document.getElementById('auditionForm');
+                    const formData = new FormData(form);
+                    formData.append("payment_order_id", data.orderID)
+
+                    fetch("/api/audition_registrations", {
+                        method: "POST",
+                        headers: {
+                            "Accept": "application/json",
+                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+                        },
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        document.getElementById('formMessage').innerHTML = 'You have successfully registered';
+                    })
+                    .catch(err => {
+                        console.error("Error registrando: ", err)
+                        document.getElementById('formMessage').innerHTML = `Error saving registration, please save this ID: ${data.orderID} for future payment refunds. `
+                    })
+                })
+            }
+        }).render('#paypal-button-container')
     </script>
     {{--  Cargar Horas disponibles  --}}
     <script>

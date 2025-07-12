@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'paypal_client_id' => env('PAYPAL_CLIENT_ID', ''),
+
 ];

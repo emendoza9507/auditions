@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->date('date');
             $table->time('start');
+            $table->decimal('price', 8, 2)->default(35);
             $table->boolean('active')->default(true);
             $table->unsignedInteger('max_per_slot')->default(4);
+            $table->longText('content')->nullable();
             $table->timestamps();
         });
     }

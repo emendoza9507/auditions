@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $audition = Audition::query()->where('active', true)->orderBy('created_at', 'desc')->first();
+
     return view('welcome', [
         'audition' => $audition
     ]);
