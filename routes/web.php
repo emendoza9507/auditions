@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuditionPaymentController;
 use App\Http\Controllers\AuditionRegistrationController;
+use App\Http\Controllers\DefaultController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -33,5 +34,7 @@ Route::post('/audition_registrations', [AuditionRegistrationController::class, '
 
 Route::get('/paypal/success', [AuditionPaymentController::class, 'success'])->name('paypal.success');
 Route::get('/paypal/cancel', [AuditionPaymentController::class, 'cancel'])->name('paypal.cancel');
+
+Route::get('/privacy', [DefaultController::class, 'privacy'])->name('privacy');
 
 require __DIR__.'/auth.php';

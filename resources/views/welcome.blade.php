@@ -70,7 +70,9 @@
             <label for="schedule">Schedule</label>
             <select name="audition_slot_id" id="schedule"></select>
 
-            <label><input type="checkbox"  id="agreed_terms" name="agreed_terms"/> I accept the terms of use </label>
+            <span>Audition fit: $35</span>
+
+            <label><input type="checkbox"  id="agreed_terms" name="agreed_terms"/> I accept the <a href="/privacy">terms of use</a> </label>
 
             <div id="paypal-button-container"></div>
 
