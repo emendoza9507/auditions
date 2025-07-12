@@ -24,5 +24,13 @@ class Audition extends Model
         return $this->hasMany(AuditionSlot::class);
     }
 
+    public function contents(): HasMany
+    {
+        return  $this->hasMany(Content::class);
+    }
 
+    public function registrations(): HasMany
+    {
+        return $this->hasMany(AuditionRegistration::class);
+    }
 }
