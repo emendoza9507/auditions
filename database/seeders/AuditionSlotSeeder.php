@@ -15,8 +15,8 @@ class AuditionSlotSeeder extends Seeder
      */
     public function run(): void
     {
-        $startTime = Carbon::createFromTime(9, 0, 0, );
-        $endTime = Carbon::createFromTime(16, 0, 0, );
+        $startTime = Carbon::createFromTime(13, 30, 0, );
+        $endTime = Carbon::createFromTime(17, 30, 0, );
 
         $audition = Audition::query()->create([
             'name' => 'Talent on Stage',
