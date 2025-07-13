@@ -64,6 +64,11 @@ select:focus[data-flux-control] {
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     font-family: "Georgia", serif;
@@ -276,4 +281,35 @@ footer {
     text-align: center;
     color: green;
     font-weight: bold;
+}
+
+.floating-button {
+    position: absolute;
+    bottom: 20px;
+    right: 47%;
+    background-color: #ffdd002b;
+    color: white;
+    font-size: 24px;
+    border-radius: 100%;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    animation: bounce 1s infinite;
+    z-index: 10;
+    transition: background-color 0.3s;
+    text-align: center;
+    height: 70px;
+    width: 70px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+}
+
+.floating-button:hover {
+    background-color: #8b6c43;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }

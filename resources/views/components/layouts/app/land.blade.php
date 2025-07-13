@@ -9,13 +9,19 @@
                 <div id="countdown" style="margin-top:0.5rem;color:red; font-size:1.5rem; font-weight:bold;  padding: 0.5rem 0; border-radius: 5px; letter-spacing: 1px;">
                     Loading countdown...
                 </div>
-                <h1><span>JH</span>arts Foundation</h1>
+                <h1><span><a href="/">JH</a></span>arts Foundation</h1>
                 <p><i>Presents:</i></p>
-                <h2>Auditions</h2>
-                <p>26 July 2025</p>
+                <h2 class="!text-[#FFD700]">Auditions</h2>
+                <p>{{ $audition->date->format('d F Y')  }}</p>
                 <p>Southeast Branch Library</p>
                 <p style="margin-top:-6px; font-size:16px;">5575 S Semoran Blvd, Orlando FL 32822</p><!-- <a href="#registration" class="btn">Register Now</a> -->
             </div>
+
+            @if(request()->is('/'))
+            <a href="#registration" class="floating-button" title="Register Now">
+                <flux:icon.user-round-plus class="size-8"/>
+            </a>
+            @endif
         </header>
 
         {{ $slot }}
