@@ -70,9 +70,9 @@
             <label for="schedule">Schedule</label>
             <select name="audition_slot_id" id="schedule"></select>
 
-            <span>Audition fit: $35</span>
+            <span class="text-xl">Audition fit: $35</span>
 
-            <label><input type="checkbox"  id="agreed_terms" name="agreed_terms"/> I accept the <a href="/privacy">terms of use</a> </label>
+            <label><input type="checkbox"  id="agreed_terms" name="agreed_terms"/> I accept the <a href="/privacy" class="underline">terms of use</a> </label>
 
             <div id="paypal-button-container"></div>
 
@@ -127,7 +127,7 @@
     </script>
     <script>
         const countdownEl = document.getElementById('countdown');
-        const targetDate = new Date('July 26, 2025 23:59:59').getTime();
+        const targetDate = new Date(@json($audition->date)).getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();

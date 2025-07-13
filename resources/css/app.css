@@ -71,6 +71,21 @@ body {
     color: #333;
 }
 
+h1 {
+    font-size: 36px;
+    color: #FFD700;
+    text-align: center;
+    text-shadow: 0 0 10px #FFD700;
+    margin-bottom: 20px;
+}
+h2 {
+    font-size: 24px;
+    color: #FFD700;
+    margin-top: 20px;
+    border-bottom: 2px solid #FFD700;
+    padding-bottom: 5px;
+}
+
 .hero {
     background-image: url('https://jhartsfoundation.org/wp-content/uploads/2024/05/pexels-wendy-wei-1540406-scaled-1.jpg');
     background-size: cover;
