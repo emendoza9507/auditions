@@ -29,9 +29,9 @@
             <div id="countdown" style="margin-top:0.5rem;color:red; font-size:1.5rem; font-weight:bold;  padding: 0.5rem 0; border-radius: 5px; letter-spacing: 1px;">
                 Loading countdown...
             </div>
-            <h1><span>JH</span>arts Foundation</h1>
+            <h1><span><a href="/">JH</a></span>arts Foundation</h1>
             <p><i>Presents:</i></p>
-            <h2>Auditions</h2>
+            <h2 class="!text-[#FFD700]">Auditions</h2>
             <p>{{ $audition->date->format('d F Y')  }}</p>
             <p>Southeast Branch Library</p>
             <p style="margin-top:-6px; font-size:16px;">5575 S Semoran Blvd, Orlando FL 32822</p><!-- <a href="#registration" class="btn">Register Now</a> -->
@@ -44,7 +44,7 @@
 
 
     <section id="registration" class="form-section">
-        <h2>Registration Form</h2>
+        <h2 class="text-sky-700">Registration Form</h2>
         <form id="auditionForm" action="{{ route('audition_registration.store') }}" method="POST">
             @csrf
             <input type="hidden" name="audition_id" value="{{ $audition->id }}"/>
@@ -70,7 +70,7 @@
             <label for="schedule">Schedule</label>
             <select name="audition_slot_id" id="schedule"></select>
 
-            <span class="text-xl">Audition fit: $35</span>
+            <span class="text-xl bold">Audition fee: $35</span>
 
             <label><input type="checkbox"  id="agreed_terms" name="agreed_terms"/> I accept the <a href="/privacy" class="underline">terms of use</a> </label>
 
