@@ -1,7 +1,9 @@
 <x-layouts.app.land>
 
     @foreach($audition->contents()->orderBy('order')->get() as $content)
-        {!! str($content->content)->sanitizeHtml() !!}
+        <section class="container">
+            {!! str($content->content)->sanitizeHtml() !!}
+        </section>
     @endforeach
 
 
