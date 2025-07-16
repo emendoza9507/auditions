@@ -179,7 +179,7 @@
                 available.forEach(slot => {
                     const opt = document.createElement('option');
                     opt.value = slot.id;
-                    opt.textContent = `${slot.time} (${slot.remaining} spots left)`;
+                    opt.textContent = `${slot.time}`;
                     select.appendChild(opt);
                 })
 

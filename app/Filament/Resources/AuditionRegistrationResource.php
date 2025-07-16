@@ -30,7 +30,7 @@ class AuditionRegistrationResource extends Resource
                     ->relationship('audition', 'name')
                     ->required(),
                 Forms\Components\Select::make('audition_slot_id')
-                    ->options(fn() => $this->slots),
+                    ->options(fn($record) => $record->slots),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(191),
