@@ -17,7 +17,7 @@ class AuditionSlotController extends Controller
 
                 return [
                     'id' => $slot->id,
-                    'time' => $slot->time->format('H:i'),
+                    'time' => $slot->time->format('h:i A'),
                     'available' => $remaining > 0,
                     'remaining' => $remaining
                 ];
