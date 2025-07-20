@@ -12,7 +12,7 @@
                 <h1><span><a href="/">JH</a></span>arts Foundation</h1>
                 <p><i>Presents:</i></p>
                 <h2 class="!text-[#FFD700]">Auditions</h2>
-                <p>{{ $audition->date->format('d F Y')  }}</p>
+                <p>{{ $audition->date->format('F d, Y')  }}</p>
                 <p>Southeast Branch Library</p>
                 <p style="margin-top:-6px; font-size:16px;">5575 S Semoran Blvd, Orlando FL 32822</p><!-- <a href="#registration" class="btn">Register Now</a> -->
             </div>
