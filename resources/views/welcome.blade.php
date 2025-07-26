@@ -36,7 +36,7 @@
 
             <span class="text-xl bold text-blue-500">Audition fee: $35</span>
 
-            <label><input type="checkbox"  id="agreed_terms" name="agreed_terms"/> I accept the <a href="/privacy" class="underline">terms of use</a> </label>
+            <label><input type="checkbox"  id="agreed_terms" name="agreed_terms"/> I have read and accept the <a href="/privacy" class="underline">Terms of Registration</a> </label>
 
             <div id="paypal-button-container"></div>
 
