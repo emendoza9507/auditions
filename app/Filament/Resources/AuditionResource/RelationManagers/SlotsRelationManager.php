@@ -4,6 +4,7 @@ namespace App\Filament\Resources\AuditionResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -85,7 +86,11 @@ class SlotsRelationManager extends RelationManager
                             $startTime->addMinutes($interval);
                         }
 
-                        $this->notify('success', 'Slots created successfully.');
+                        Notification::make()
+                            ->title('Slots Created')
+                            ->body('Slots have been created successfully.')
+                            ->success()
+                            ->send();
                     }),
             ])
             ->actions([
