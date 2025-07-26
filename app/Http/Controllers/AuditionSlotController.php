@@ -10,7 +10,9 @@ class AuditionSlotController extends Controller
 {
     public function available(): JsonResponse
     {
-        $slots = AuditionSlot::query()->withCount('registrations')
+        $slots = AuditionSlot::query()
+            ->orderBy('time')
+            ->withCount('registrations')
             ->get()
             ->map(function ($slot) {
                 $remaining = $slot->max_participants - $slot->registrations_count;

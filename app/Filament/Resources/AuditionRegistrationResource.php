@@ -34,6 +34,7 @@ class AuditionRegistrationResource extends Resource
                     ->searchable()
                     ->reactive(),
                 Forms\Components\Select::make('audition_slot_id')
+                    ->label('Audition Slot')
                     ->native(false)
                     ->searchable()
                     ->preload()
@@ -43,7 +44,7 @@ class AuditionRegistrationResource extends Resource
                             ->where('audition_id', $auditionId)
                             ->get()
                             ->mapWithKeys(fn (AuditionSlot $slot) => [
-                                $slot->id => $slot->time->format('H:i')
+                                $slot->id => $slot->time->format('h:i A')
                             ]);
                     })
                     ->disabled(fn (callable $get) => !$get('audition_id'))
@@ -93,6 +94,7 @@ class AuditionRegistrationResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('audition_slot_id')
+                
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
