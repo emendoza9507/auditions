@@ -28,9 +28,27 @@ class AuditionRegistrationResource extends Resource
             ->schema([
                 Forms\Components\Select::make('audition_id')
                     ->relationship('audition', 'name')
-                    ->required(),
+                    ->required()
+                    ->native(false)
+                    ->preload()
+                    ->searchable()
+                    ->reactive(),
                 Forms\Components\Select::make('audition_slot_id')
-                    ->options(fn($record) => $record->slots),
+                    ->native(false)
+                    ->searchable()
+                    ->preload()
+                    ->options(function (callable $get) {
+                        $auditionId = $get('audition_id');
+                        return AuditionSlot::query()
+                            ->where('audition_id', $auditionId)
+                            ->get()
+                            ->mapWithKeys(fn (AuditionSlot $slot) => [
+                                $slot->id => $slot->time->format('H:i')
+                            ]);
+                    })
+                    ->disabled(fn (callable $get) => !$get('audition_id'))
+                    ->required()
+                    ->reactive(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(191),
@@ -50,15 +68,20 @@ class AuditionRegistrationResource extends Resource
                     ->tel()
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('agreed_terms')
-                    ->required()
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('payment_status')
-                    ->required()
-                    ->maxLength(191)
-                    ->default('pending'),
                 Forms\Components\TextInput::make('payment_order_id')
                     ->maxLength(191),
+                Forms\Components\Select::make('payment_status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'completed' => 'Completed',
+                        'failed' => 'Failed',
+                    ])
+                    ->required()
+                    ->default('pending'),
+                
+                Forms\Components\Checkbox::make('agreed_terms')
+                    ->default(true)
+                    ->required()
             ]);
     }
 

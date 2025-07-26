@@ -10,4 +10,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/audition-slots', [AuditionSlotController::class, 'available']);
-Route::post('/api/audition_registrations', [AuditionRegistrationController::class, 'store']);
+Route::post('/audition_registrations', [AuditionRegistrationController::class, 'store']);
+Route::post('/audition_registrations_test', [AuditionRegistrationController::class, 'verify']);

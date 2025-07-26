@@ -32,15 +32,25 @@
             <input type="phone" id="phone" name="phone" required />
 
             <label for="schedule">Schedule</label>
-            <select name="audition_slot_id" id="schedule"></select>
+            <select name="audition_slot_id"  id="schedule" required></select>
 
-            <span class="text-xl bold">Audition fee: $35</span>
+            <span class="text-xl bold text-blue-500">Audition fee: $35</span>
 
             <label><input type="checkbox"  id="agreed_terms" name="agreed_terms"/> I accept the <a href="/privacy" class="underline">terms of use</a> </label>
 
             <div id="paypal-button-container"></div>
 
-            {{--            <button type="submit">Submit Registration</button>--}}
+            <div>
+                <p id="countdown" class="text-red-500 font-bold">
+                    If you have already completed the payment through PayPal or another method, 
+                    please enter your Order ID below to validate your payment. 
+                    Only fill in this field if you have already paid and need to complete your registration.
+                </p>
+            </div>
+            <label for="order_id">Order ID</label>
+            <input type="text" id="order_id" name="order_id"/>
+
+            <button id="form-submit" class="hidden" type="submit">Submit Registration</button>
         </form>
         <div id="formMessage" class="form-message"></div>
     </section>
@@ -61,6 +71,19 @@
             }
         })
 
+        document.getElementById("order_id").addEventListener("input", function() {
+            const orderId = this.value.trim();
+            const formMessage = document.getElementById("formMessage");
+            const formSubmit = document.getElementById("form-submit");
+            if(orderId) {
+                formSubmit.classList.remove("hidden");
+                formMessage.innerHTML = "Order ID detected, you can now submit the form.";
+                formMessage.style.color = "green";
+            } else {
+                formSubmit.classList.add("hidden");
+            }
+        });
+
         document.getElementById("auditionForm").addEventListener("submit", function (e) {
             e.preventDefault();
 
@@ -73,12 +96,37 @@
                 return;
             }
 
-            this.submit()
+            const form = document.getElementById('auditionForm');
+            const formData = new FormData(form);
 
-            messageEl.style.color = "green";
-            messageEl.textContent = "Registration successfully submitted! We will contact you soon.";
+            const orderId = document.getElementById('order_id').value.trim();
+            if (orderId) {
+                formData.append("order_id", orderId);
+            } else {
+                messageEl.innerHTML = "Please complete the payment before submitting the form.";
+                return;
+            }
 
-            this.reset();
+            formData.append("payment_order_id", orderId);
+
+            fetch("/api/audition_registrations_test", {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('formMessage').innerHTML = 'You have successfully registered';
+                    messageEl.style.color = "green";
+                    this.reset();
+                })
+                .catch(err => {
+                    console.error("Error registrando: ", err)
+                    document.getElementById('formMessage').innerHTML = `Error saving registration, please save this ID: ${data.orderID} for future payment refunds. `
+                })
         });
 
     </script>
