@@ -65,6 +65,8 @@ class AuditionRegistrationController extends Controller
                 'verified_at' => now(),
             ]);
 
+            Mail::to($auditionRegistration->email)->send(new \App\Mail\NewAuditionRegistration($auditionRegistration));
+
             return response()->json($auditionRegistration, 201)->header('Location', route('audition_registration.show', [ 'auditionRegistration' => $auditionRegistration->id ]));
         } else {
             return response()->json(['message' => 'Payment verification failed.'], 400);

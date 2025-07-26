@@ -40,7 +40,7 @@
 
             <div id="paypal-button-container"></div>
 
-            <div>
+            {{-- <div>
                 <p id="countdown" class="text-red-500 font-bold">
                     If you have already completed the payment through PayPal or another method, 
                     please enter your Order ID below to validate your payment. 
@@ -48,7 +48,7 @@
                 </p>
             </div>
             <label for="order_id">Order ID</label>
-            <input type="text" id="order_id" name="order_id"/>
+            <input type="text" id="order_id" name="order_id"/> --}}
 
             <button id="form-submit" class="hidden" type="submit">Submit Registration</button>
         </form>

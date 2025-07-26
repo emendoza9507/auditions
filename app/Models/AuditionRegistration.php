@@ -26,6 +26,6 @@ class AuditionRegistration extends Model
 
     public function slot(): BelongsTo
     {
-        return $this->belongsTo(AuditionSlot::class);
+        return $this->belongsTo(AuditionSlot::class, 'audition_slot_id', 'id');
     }
 }

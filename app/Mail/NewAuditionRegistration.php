@@ -36,7 +36,10 @@ class NewAuditionRegistration extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.newregistration',
+            markdown: 'mails.newregistration',
+            with: [
+                'registration' => $this->registration,
+            ],
         );
     }
 
