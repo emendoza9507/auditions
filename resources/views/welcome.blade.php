@@ -199,6 +199,7 @@
                         .then(res => res.json())
                         .then(data => {
                             document.getElementById('formMessage').innerHTML = 'You have successfully registered';
+                            location.href = `/audition_registration/${data.id}`;
                         })
                         .catch(err => {
                             console.error("Error registrando: ", err)

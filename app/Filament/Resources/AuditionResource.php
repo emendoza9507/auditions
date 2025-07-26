@@ -30,7 +30,7 @@ class AuditionResource extends Resource
                     ->maxLength(191),
                 Forms\Components\DatePicker::make('date')
                     ->required(),
-                Forms\Components\TextInput::make('start')
+                Forms\Components\TimePicker::make('start')
                     ->required(),
                 Forms\Components\TextInput::make('price')
                     ->required()

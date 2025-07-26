@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,6 +19,11 @@ class Audition extends Model
     ];
 
     protected $casts = ['start' => 'datetime:H:i', 'date' => 'date'];
+
+    public function setStartAttribute($value)
+    {
+        $this->attributes['start'] = Carbon::createFromFormat('h:i A', $value)->format('H:i:s');
+    }
 
     public function slots(): HasMany
     {

@@ -5,6 +5,7 @@ namespace App\Filament\Resources\AuditionResource\RelationManagers;
 use Filament\Actions\CreateAction;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\View\Components\Modal;
 use Filament\Tables;
@@ -28,15 +29,16 @@ class RegistrationsRelationManager extends RelationManager
                 Forms\Components\Select::make('audition_slot_id')
                     ->label('Time')
                     ->relationship('audition.slots')
-                    ->getOptionLabelFromRecordUsing(fn($record) => $record->time->format('H:i'))
+                    ->getOptionLabelFromRecordUsing(fn($record) => $record->time->format('h:i A'))
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('age')
                     ->required()
+                    ->default(19)
+                    ->reactive()
                     ->maxLength(191)
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('parent_name')
-                    ->visible(fn($get) => $get('age') < 18)
-                    ->maxLength(191)
+                    ->visible(fn (Get $get) => $get('age') < 18)
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('email')
                     ->email()
@@ -52,6 +54,8 @@ class RegistrationsRelationManager extends RelationManager
                     ->required()
                     ->maxLength(191)
                     ->columnSpanFull(),
+                Forms\Components\TextInput::make('payment_order_id')
+                    ->maxLength(191),
                 Forms\Components\Checkbox::make('agreed_terms'),
                 Forms\Components\Hidden::make('payment_status')
                     ->default('pending'),
