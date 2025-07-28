@@ -12,5 +12,11 @@
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 <script src="https://www.paypal.com/sdk/js?client-id={{config('app.paypal_client_id')}}"></script>
 
+@env('production')
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16650334175"></script> 
+    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-16650334175'); </script>
+@endenv
+
+
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @fluxAppearance
