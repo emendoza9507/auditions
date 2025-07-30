@@ -2,7 +2,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>{{ $title ?? config('app.name') }}</title>
+<title>Youth Symphony Orchestra Auditions | Apply Today</title>
+<meta name="description" content="Are you a young musician? Audition for our Youth Community Symphony . Open to talented youth in all instruments. Apply now and join us!">
+<meta name="keywords" content="youth community ymphony , symphony youth orchestra, music auditions for youth, young musicians call, classical music youth, youth orchestra application, talented young musicians">
+<link rel="canonical" href="https://auditions.jhartsfoundation.org/">
+
+{{-- <title>{{ $title ?? config('app.name') }}</title> --}}
 
 <link rel="icon" href="https://jhartsfoundation.org/wp-content/uploads/2024/05/cropped-New-JHAF-Logo-black-32x32.png" sizes="32x32">
 <link rel="icon" href="https://jhartsfoundation.org/wp-content/uploads/2024/05/cropped-New-JHAF-Logo-black-192x192.png" sizes="192x192">
